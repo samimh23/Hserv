@@ -3,7 +3,9 @@ const {
   PrivateKey,
   Client,
   AccountCreateTransaction,
-  TokenAssociateTransaction
+  TokenAssociateTransaction,
+  TransferTransaction,
+  Hbar
 } = require("@hashgraph/sdk");
 require('dotenv').config({ path: './.env' });
 
@@ -31,7 +33,7 @@ async function createWallet() {
     const txTokenAssociate = new TokenAssociateTransaction()
       .setAccountId(accountId)
       .setTokenIds([tokenId])
-      .freezeWith(client);
+      .freezeWith(client);  
 
     const signTxTokenAssociate = await txTokenAssociate.sign(accountPrivateKey);
     const txTokenAssociateResponse = await signTxTokenAssociate.execute(client);
