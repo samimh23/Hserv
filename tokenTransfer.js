@@ -6,29 +6,25 @@ const {
 } = require("@hashgraph/sdk"); // v2.46.0
 require('dotenv').config({ path: './.env' });
 
-async function main() {
+async function transferTokens(senderAccountId, senderPrivateKey, receiverAccountId, amount) {
     let client;
     try {
-        const MY_ACCOUNT_ID = process.env.MY_ACCOUNT_ID;
-        const MY_PRIVATE_KEY = process.env.MY_PRIVATE_KEY;
-
-        if (!MY_ACCOUNT_ID || !MY_PRIVATE_KEY) {
-            throw new Error("Environment variables MY_ACCOUNT_ID or MY_PRIVATE_KEY are missing");
+        if (!senderAccountId || !senderPrivateKey || !receiverAccountId || !amount) {
+            throw new Error("Missing input parameters: senderAccountId, senderPrivateKey, receiverAccountId, or amount");
         }
 
         // Convert private key from string to PrivateKey object
-        const operatorKey = PrivateKey.fromString(MY_PRIVATE_KEY);
+        const operatorKey = PrivateKey.fromString(senderPrivateKey);
 
-        client = Client.forTestnet().setOperator(MY_ACCOUNT_ID, operatorKey);
+        client = Client.forTestnet().setOperator(senderAccountId, operatorKey);
 
-        // Start your code here
+        // Token ID (replace with your actual token ID)
         const tokenId = "0.0.5677997";
-        const receiverId = "0.0.5678161"; 
 
         // Create the transfer transaction
         const txTransfer = await new TransferTransaction()
-            .addTokenTransfer(tokenId, MY_ACCOUNT_ID, -360)
-            .addTokenTransfer(tokenId, receiverId, 360)
+            .addTokenTransfer(tokenId, senderAccountId, -amount)
+            .addTokenTransfer(tokenId, receiverAccountId, amount)
             .freezeWith(client);
 
         // Sign with the sender account private key
@@ -56,4 +52,4 @@ async function main() {
     }
 }
 
-main();
+module.exports = transferTokens;
