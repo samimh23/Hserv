@@ -38,6 +38,16 @@ async function createWallet() {
     const receiptTokenAssociateTx = await txTokenAssociateResponse.getReceipt(client);
 
     console.log("✅ Account and token association successful");
+            // Send some money to make the account opperetable
+                const txTransfer= new TransferTransaction()
+                .addHbarTransfer(MY_ACCOUNT_ID, new Hbar(-10))
+                .addHbarTransfer(accountId, new Hbar(10)); 
+                    
+            //Submit the transaction to a Hedera network
+            const txTransferResponse = await txTransfer.execute(client);
+    
+            //Request the receipt of the transaction
+            const receiptTransferTx = await txTransferResponse.getReceipt(client);
 
     return {
       accountId: accountId.toString(),

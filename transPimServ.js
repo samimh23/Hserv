@@ -46,13 +46,13 @@ app.post('/api/token/Lock', async (req, res) => {
     res.status(200).json({ message: 'Token transfer successful' }); 
 
   } catch (error) {
-    console.error('Error in /api/token/transfer:', error);
+    console.error('Error in /api/token/Lock:', error);
     res.status(500).json({ error: 'Failed to process token transfer' });
   }
 });
 
 //Unlock Amount
-app.post('/api/token/transfer', async (req, res) => {
+app.post('/api/token/Unlock', async (req, res) => {
     try {
       const { receiverAccountId, amount } = req.body;
   
@@ -66,7 +66,7 @@ app.post('/api/token/transfer', async (req, res) => {
     res.status(200).json({ message: 'Token transfer successful' }); 
 
   } catch (error) {
-    console.error('Error in /api/token/transfer:', error);
+    console.error('Error in /api/token/Unlock:', error);
     res.status(500).json({ error: 'Failed to process token transfer' });
   }
 });
