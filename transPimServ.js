@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const createWallet = require('./createWallet'); // adjust if needed
 const tokenTransfer = require('./tokenTransfer');
+const getBalance = require('./getBalance');
 
 dotenv.config();
 
@@ -27,7 +28,7 @@ app.post('/api/wallet/create', async (req, res) => {
     const wallet = await createWallet();
     res.status(201).json(wallet);
   } catch (error) {
-    console.error('Error in /api/wallet/create:', error);
+    console.error('Error in /api/wallet/create:', error);       
     res.status(500).json({ error: 'Failed to create wallet' });
   }
 });
@@ -90,6 +91,25 @@ app.post('/api/token/transfer', async (req, res) => {
     res.status(500).json({ error: 'Failed to process token transfer' });
   }
 });
+
+  // get Balance
+app.post('/api/token/balance', async (req, res) => { // Changed to POST for body parameters
+  try {
+    const { accountId, privateKey } = req.body;
+    if (!accountId || !privateKey) {
+      return res.status(400).json({ error: 'Missing required fields in request body' });
+    }
+
+    // Call the getBalance function
+    const balance = await getBalance(accountId, privateKey);
+
+    res.status(200).json(balance);
+  } catch (error) {
+    console.error('Error in /api/token/balance', error);
+    res.status(500).json({ error: 'Failed to get token balance' });
+  }
+});
+
 
 // Start server
 app.listen(PORT, '0.0.0.0', () => {
