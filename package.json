@@ -1,10 +1,10 @@
 {
   "name": "blockback",
   "version": "1.0.0",
-  "main": "tansPimServ.js",
+  "main": "transPimServ.js",
   "scripts": {
-  "start": "node tansPimServ.js",
-  "dev": "node tansPimServ.js",
+  "start": "node transPimServ.js",
+  "dev": "node transPimServ.js",
   "test": "echo \"Error: no test specified\" && exit 1"
 }
 ,
