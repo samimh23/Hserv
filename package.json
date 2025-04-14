@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "tansPimServ.js",
   "scripts": {
-    "start": "tansPimServ.js",
-    "dev": " tansPimServ.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "start": "node tansPimServ.js",
+  "dev": "node tansPimServ.js",
+  "test": "echo \"Error: no test specified\" && exit 1"
+}
+,
   "author": "",
   "license": "ISC",
   "description": "",
