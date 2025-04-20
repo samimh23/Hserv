@@ -29,7 +29,7 @@ async function createWallet() {
     const receiptCreateAccountTx = await txCreateAccountResponse.getReceipt(client);
     const accountId = receiptCreateAccountTx.accountId;
 
-    const tokenId = "0.0.5677997";  // Replace with your actual token ID
+    const tokenId = "0.0.5883473";  // Replace with your actual token ID
     const txTokenAssociate = new TokenAssociateTransaction()
       .setAccountId(accountId)
       .setTokenIds([tokenId])
