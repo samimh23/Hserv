@@ -19,7 +19,7 @@ async function transferTokens(senderAccountId, senderPrivateKey, receiverAccount
         client = Client.forTestnet().setOperator(senderAccountId, operatorKey);
 
         // Token ID (replace with your actual token ID)
-        const tokenId = "0.0.5677997";
+        const tokenId = "0.0.5883473";
 
         // Create the transfer transaction
         const txTransfer = await new TransferTransaction()

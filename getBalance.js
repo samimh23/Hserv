@@ -17,7 +17,7 @@ async function getBalance(accountID, privateKey) {
     client.setOperator(accountID, privateKey);
 
     // Define the token ID you want to check balance for
-    const tokenId = TokenId.fromString('0.0.5677997'); // The token ID you want to query
+    const tokenId = TokenId.fromString('0.0.5883473'); // The token ID you want to query
 
     // Create the account balance query for the specific token
     const accountBalanceQuery = new AccountBalanceQuery()
