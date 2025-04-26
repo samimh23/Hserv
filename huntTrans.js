@@ -9,17 +9,30 @@ async function fetchTransactions(accountId) {
     let tracedTransactions = [];
 
     if (transactions && transactions.length > 0) {
-      transactions.forEach((tx, index) => {
-        // Filter out transactions with ID starting with '0.0.5314413-'
+      transactions.forEach((tx) => {
         if (tx.transaction_id.startsWith("0.0.5314413-")) {
-          return; // Skip the transaction
+          return; // Skip
+        }
+
+        let direction = "UNKNOWN"; // default
+        let amount = 0;
+
+        if (tx.transfers && tx.transfers.length > 0) {
+          tx.transfers.forEach((transfer) => {
+            if (transfer.account === accountId) {
+              amount = transfer.amount;
+              direction = amount > 0 ? "RECEIVE" : "SEND";
+            }
+          });
         }
 
         let transactionDetails = {
           id: tx.transaction_id,
           type: tx.name,
           timestamp: tx.consensus_timestamp,
-          result: tx.result
+          result: tx.result,
+          direction: direction,
+          amount: amount / 1e8 // HBAR amount (because Hedera amounts are in tinybar = HBAR * 10^8)
         };
 
         tracedTransactions.push(transactionDetails);
