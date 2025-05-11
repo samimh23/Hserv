@@ -14,7 +14,7 @@ const {
       // Set the client with operator
       client = Client.forTestnet().setOperator(accountId, privateKey);
   
-      const tokenId = "0.0.5677997";
+      const tokenId = "0.0.5883473";
   
       const txTokenAssociate = await new TokenAssociateTransaction()
         .setAccountId(accountId)
